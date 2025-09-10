@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
+
+@import "tailwindcss";
+
+/* Base layer customizations */
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-[#0F1824] text-neutral-300 antialiased;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  body ::selection { background: #14b8a6AA; color: #fff; }
+  a { @apply transition-colors; }
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight text-white font-bold;
+  }
+}
+
+@layer components {
+  .container-section { @apply max-w-6xl mx-auto px-4 md:px-8; }
+  .section-title { @apply text-3xl md:text-4xl font-semibold mb-8 bg-gradient-to-r from-white via-white/80 to-white/50 bg-clip-text text-transparent; }
+  .glass { @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-lg; }
+  .tag { @apply inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-white/80 border border-white/10; }
+  .btn-primary { @apply relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:shadow-indigo-500/40 focus-visible:outline-none; }
+  .btn-outline { @apply inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-white/80 hover:text-white hover:border-white/30 transition focus-visible:outline-none; }
+  .card-hover { @apply transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10; }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1E2533; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #2C3547; }
+
+/* Utility additions */
+.text-gradient { @apply bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400 bg-clip-text text-transparent; }
+
