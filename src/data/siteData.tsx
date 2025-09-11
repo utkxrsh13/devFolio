@@ -1,7 +1,18 @@
 import type { ReactNode } from 'react';
 import { 
   SiReact, SiTypescript, SiTailwindcss, SiNodedotjs, SiExpress, SiMongodb, 
-  SiGithub, SiLinkedin 
+  SiGithub, SiLinkedin, 
+  SiMysql,
+  SiDocker,
+  SiJavascript,
+  SiHtml5,
+  SiCss3,
+  SiRedux,
+  SiGit,
+  SiPostman,
+  SiFramer,
+  SiFirebase,
+  SiAppwrite
 } from 'react-icons/si';
 
 export interface Project {
@@ -30,39 +41,78 @@ export interface SkillItem { name: string; icon: ReactNode }
 
 export const skills: SkillItem[] = [
   { name: 'React', icon: <SiReact className="text-sky-400" /> },
+  { name: 'Javascript', icon: <SiJavascript className="text-yellow-400" /> },
+  { name: 'HTML5', icon: <SiHtml5 className="text-orange-500" /> },
+  { name: 'CSS3', icon: <SiCss3 className="text-blue-500" /> },
+  { name: 'Redux', icon: <SiRedux className="text-purple-500" /> },
+  { name: 'Github', icon: <SiGithub className="text-neutral-300" /> },
+  { name: 'Git', icon: <SiGit className="text-orange-500" /> },
+  { name: 'Postman', icon: <SiPostman className="text-orange-400" /> },
+  { name: 'Framer', icon: <SiFramer className="text-fuchsia-500" /> },
+  { name: 'Firebase', icon: <SiFirebase className="text-amber-400" /> },
   { name: 'TypeScript', icon: <SiTypescript className="text-blue-500" /> },
   { name: 'Tailwind', icon: <SiTailwindcss className="text-cyan-400" /> },
   { name: 'Node.js', icon: <SiNodedotjs className="text-green-500" /> },
   { name: 'Express', icon: <SiExpress className="text-neutral-300" /> },
-  { name: 'MongoDB', icon: <SiMongodb className="text-green-400" /> },
+  { name: 'MongoDB', icon: <SiMongodb className="text-emerald-500" /> },
+  { name: 'Mysql', icon: <SiMysql className="text-sky-500" /> },
+  { name: 'Docker', icon: <SiDocker className="text-blue-400" /> },
+  { name: 'Appwrite', icon: <SiAppwrite className="text-rose-500" /> },
 ];
 
 export const projects: Project[] = [
   {
     id: 'p1',
-    title: 'Project One',
-    description: 'A modern web application demonstrating fullstack capabilities and clean architecture.',
+    title: 'CareerVista',
+    description: 'A modern Job Portal application, providing essential features like user authentication, role-based access, job management, and application tracking. Built with Node.js, Express.js, and MongoDB',
     tech: ['React', 'TypeScript', 'Tailwind', 'Node', 'Express', 'MongoDB'],
-    repo: 'https://github.com/username/project-one',
-  demo: 'https://project-one.demo',
+    repo: 'https://github.com/utkxrsh13/CareerVista-Backend',
+  demo: 'https://career-vista.onrender.com/',
+  image: '/p2.png',
   featured: true,
   highlight: 'Featured Project'
   },
   {
     id: 'p2',
-    title: 'Realtime Dashboard',
-    description: 'Interactive realtime analytics dashboard with websockets and modular components.',
-    tech: ['React', 'TypeScript', 'Tailwind', 'Socket.io'],
-  repo: 'https://github.com/username/realtime-dashboard',
+    title: 'InspiraPix',
+    description: 'Built with the MERN stack, the app provides an intuitive interface where users can type in text prompts, and the AI generates images in real time. It aims to explore the potential of AI in creative fields like art, design, and content generation.',
+    tech: ['React', 'MongoDB', 'Tailwind', 'Framer-motion'],
+  repo: 'https://github.com/utkxrsh13/Text_to_Image',
+  demo: 'https://inspirapix.vercel.app/',
+  image: '/p1.png',
   featured: true,
   highlight: 'Featured Project'
   },
   {
     id: 'p3',
-    title: 'Design System Kit',
-    description: 'Reusable component library and tokens for rapid UI development.',
-    tech: ['React', 'TypeScript', 'Tailwind', 'Storybook'],
-    repo: 'https://github.com/username/design-system'
+    title: 'InquiziAI',
+    description: 'Built to streamline quiz/test creation for educators, students, and content creators — supports customizable question count, future difficulty levels, and intelligent prompt engineering.',
+    tech: ['React', 'Tailwind', 'FastApi','Hugging Face'],
+    repo: 'https://github.com/utkxrsh13/Inquizii'
+  },
+  {
+    id: 'p4',
+    title: 'Ground Water Level Prediction',
+    description: 'Groundwater Level Prediction A machine learning-powered project to predict groundwater levels using historical and environmental data. Utilizes regression models for accurate forecasting to aid sustainable water resource management.',
+    tech: ['React', 'Python', 'FastApi','LLMs'],
+    repo: 'https://github.com/utkxrsh13/GWLP',
+    demo: 'https://gwlp.vercel.app/'
+  },
+  {
+    id: 'p5',
+    title: 'File Transfer App',
+    description: 'A cross-platform application to transfer files of any type from one person to another, featuring user authentication and secure file transmission using sockets.',
+    tech: ['React', 'Tailwind', 'Node.js', 'Socket.io'],
+    repo: 'https://github.com/utkxrsh13/Inquizii'
+  }
+  ,
+  {
+    id: 'p5',
+    title: 'Caffeino',
+    description: 'A coffee delivery app with features like user authentication, browsing coffee options, placing orders, and tracking delivery status in real-time.',
+    tech: ['React native', 'Zustand', 'typeScript'],
+    repo: 'https://github.com/utkxrsh13/Inquizii',
+  demo: 'https://github.com/utkxrsh13/Caffeino-App'
   }
 ];
 
@@ -116,6 +166,6 @@ export const experience: ExperienceItem[] = [
 export interface SocialLink { name: string; icon: ReactNode; url: string }
 export type { SocialLink as TSocialLink };
 export const socials: SocialLink[] = [
-  { name: 'GitHub', icon: <SiGithub />, url: 'https://github.com/username' },
-  { name: 'LinkedIn', icon: <SiLinkedin />, url: 'https://linkedin.com/in/username' },
+  { name: 'GitHub', icon: <SiGithub />, url: 'https://github.com/utkxrsh13' },
+  { name: 'LinkedIn', icon: <SiLinkedin />, url: 'https://linkedin.com/in/utkxrsh13' },
 ];

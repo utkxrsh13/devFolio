@@ -2,11 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { clsx } from 'clsx';
 import { socials } from '../data/siteData.tsx';
 import type { TSocialLink } from '../data/siteData.tsx';
+import Resume from './Resume.tsx';
 
 interface NavItem { id: string; label: string }
 
 const navItems: NavItem[] = [
+  { id: 'hero', label: 'Home' },
   { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Work' },
   { id: 'contact', label: 'Contact' },
@@ -74,7 +77,7 @@ export const Navbar = ({ className }: NavbarProps) => {
   return (
     <nav className={clsx(
       'fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-out will-change-transform',
-      scrolled ? 'bg-[#0B0F17] border-b border-white/10' : 'bg-transparent',
+      scrolled ? 'bg-[#0B0F17]/50 backdrop-blur-3xl border-b border-white/10' : 'bg-transparent',
       hidden ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100',
       className
     )}>
@@ -96,9 +99,9 @@ export const Navbar = ({ className }: NavbarProps) => {
         </ol>
         <div className="hidden md:flex items-center gap-3">
           {(socials as TSocialLink[]).map(s => (
-            <a key={s.name} href={s.url} target="_blank" rel="noreferrer" className="text-white/60 hover:text-white transition" aria-label={s.name}>{s.icon}</a>
+            <a key={s.name} href={s.url} target="_blank" rel="noreferrer" className="text-white/60 hover:text-teal-300 transition" aria-label={s.name}>{s.icon}</a>
           ))}
-          <a href="/resume.pdf" className="border border-teal-300/50 text-teal-300 hover:bg-teal-300 hover:text-[#0B0F17] transition rounded-md px-4 py-2 text-xs font-medium" download>Resume</a>
+          <Resume compact label="Resume" />
         </div>
         {/* Mobile hamburger */}
         <button
@@ -117,7 +120,7 @@ export const Navbar = ({ className }: NavbarProps) => {
       </div>
       {/* Mobile overlay */}
       <div
-        className={clsx('fixed inset-0 z-40 bg-[#05080d] transition-opacity md:hidden', open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none')}
+        className={clsx('fixed inset-0 z-40 bg-[#05080d]/50 transition-opacity md:hidden', open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none')}
         onClick={closeMenu}
       />
       {/* Mobile sliding panel */}
@@ -128,7 +131,7 @@ export const Navbar = ({ className }: NavbarProps) => {
           open ? 'translate-x-0' : 'translate-x-full'
         )}
       >
-        <nav className="bg-[#0B0F17] flex flex-col gap-6 p-8 mt-14">
+        <nav className="bg-[#0B0F17]/95 flex flex-col gap-6 p-8 mt-14">
           <ol className="flex flex-col gap-8 text-sm font-mono">
             {navItems.map((item, idx) => (
               <li key={item.id}>
@@ -149,12 +152,9 @@ export const Navbar = ({ className }: NavbarProps) => {
               <a key={s.name} href={s.url} target="_blank" rel="noreferrer" className="text-white/50 hover:text-teal-300 transition" aria-label={s.name}>{s.icon}</a>
             ))}
           </div>
-          <a
-            href="/resume.pdf"
-            onClick={closeMenu}
-            className="mt-auto inline-flex justify-center rounded-md border border-teal-300/50 px-5 py-3 text-sm font-medium text-teal-300 hover:bg-teal-300 hover:text-[#0B0F17] transition"
-            download
-          >Resume</a>
+          <div className="mt-auto">
+            <Resume label="Download" />
+          </div>
         </nav>
       </div>
     </nav>

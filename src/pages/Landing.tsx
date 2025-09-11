@@ -11,7 +11,7 @@ export const Landing = () => {
     <>
       <Hero />
       <About />
-      {/* <Skills /> */}
+      <Skills />
       <Projects />
       <Experience />
       <Contact />
