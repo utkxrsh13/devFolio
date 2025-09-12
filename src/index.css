@@ -5,10 +5,10 @@
 /* Base layer customizations */
 @layer base {
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth overflow-x-hidden;
   }
   body {
-    @apply bg-[#0F1824] text-neutral-300 antialiased;
+    @apply bg-[#0F1824] text-neutral-300 antialiased overflow-x-hidden;
     font-family: Inter, system-ui, sans-serif;
   }
   body ::selection { background: #14b8a6AA; color: #fff; }

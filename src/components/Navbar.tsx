@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { clsx } from 'clsx';
+import clsx from 'clsx';
 import { socials } from '../data/siteData.tsx';
 import type { TSocialLink } from '../data/siteData.tsx';
 import Resume from './Resume.tsx';
@@ -108,13 +108,13 @@ export const Navbar = ({ className }: NavbarProps) => {
           onClick={toggleMenu}
           aria-expanded={open}
           aria-controls="mobile-nav"
-          className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-white/15 text-white/70 hover:text-teal-300 hover:border-teal-300/60 transition relative z-[60]"
+          className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-white/15 text-white/80 hover:text-teal-300 hover:border-teal-300/60 transition relative z-[60]"
         >
           <span className="sr-only">Toggle navigation</span>
           <div className="space-y-1.5">
-            <span className={clsx('block h-0.5 w-5 bg-current transition', open && 'translate-y-[7px] rotate-45')}></span>
-            <span className={clsx('block h-0.5 w-5 bg-current transition', open && 'opacity-0')}></span>
-            <span className={clsx('block h-0.5 w-5 bg-current transition', open && '-translate-y-[7px] -rotate-45')}></span>
+            <span className={clsx('block h-0.5 w-5 bg-[currentColor] transition', open && 'translate-y-[7px] rotate-45')}></span>
+            <span className={clsx('block h-0.5 w-5 bg-[currentColor] transition', open && 'opacity-0')}></span>
+            <span className={clsx('block h-0.5 w-5 bg-[currentColor] transition', open && '-translate-y-[7px] -rotate-45')}></span>
           </div>
         </button>
       </div>

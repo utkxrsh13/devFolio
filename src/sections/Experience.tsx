@@ -24,8 +24,8 @@ export const Experience = () => {
   return (
     <section id="experience" className="relative py-24 container-section scroll-mt-28">
       {/* background */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 left-0 w-[640px] h-[640px] rounded-full bg-gradient-to-tr from-teal-500/10 via-cyan-400/5 to-transparent blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-24 left-0 w-[520px] sm:w-[640px] h-[520px] sm:h-[640px] max-w-none rounded-full bg-gradient-to-tr from-teal-500/10 via-cyan-400/5 to-transparent blur-3xl" />
       </div>
       <div className="flex items-center gap-6 mb-10">
         <h2 className="flex items-center gap-3 text-xl md:text-2xl font-semibold tracking-tight">

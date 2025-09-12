@@ -24,8 +24,8 @@ export const About = () => {
   return (
     <section id="about" className="relative py-24 container-section scroll-mt-28">
       {/* Subtle background for depth */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 right-0 w-[640px] h-[640px] rounded-full bg-gradient-to-tr from-teal-500/10 via-cyan-400/5 to-transparent blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-24 right-0 w-[520px] sm:w-[640px] h-[520px] sm:h-[640px] max-w-none rounded-full bg-gradient-to-tr from-teal-500/10 via-cyan-400/5 to-transparent blur-3xl" />
         <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_70%_20%,#2dd4bf_0,transparent_60%)]" />
       </div>
 
@@ -102,7 +102,7 @@ export const About = () => {
           viewport={{ once: true, margin: '-20% 0px' }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
         >
-          <div className="group relative w-64 h-80">
+          <div className="group relative w-52 h-64 sm:w-60 sm:h-72 md:w-64 md:h-80">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-teal-300/25 via-teal-300/5 to-transparent opacity-60 group-hover:opacity-90 transition" />
             <div className="absolute -inset-2 rounded-2xl bg-teal-300/15 blur-xl opacity-80 transition group-hover:opacity-0 group-hover:blur-none" />
             <figure className="relative rounded-xl overflow-hidden border border-white/10 w-full h-full shadow-[0_0_35px_-6px_rgba(45,212,191,0.55),0_0_0_1px_rgba(255,255,255,0.06)] group-hover:shadow-none transition-shadow duration-500">

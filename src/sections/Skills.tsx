@@ -5,8 +5,8 @@ export const Skills = () => {
   return (
     <section id="skills" className="relative py-24 container-section scroll-mt-28">
       {/* subtle background matching the theme */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 left-0 w-[640px] h-[640px] rounded-full bg-gradient-to-tr from-teal-500/10 via-cyan-400/5 to-transparent blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-24 left-0 w-[520px] sm:w-[640px] h-[520px] sm:h-[640px] max-w-none rounded-full bg-gradient-to-tr from-teal-500/10 via-cyan-400/5 to-transparent blur-3xl" />
         <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_20%_20%,#2dd4bf_0,transparent_60%)]" />
       </div>
 

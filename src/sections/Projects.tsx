@@ -10,8 +10,8 @@ export const Projects = () => {
   return (
     <section id="projects" className="relative py-24 container-section scroll-mt-28">
       {/* subtle background */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-28 left-1/4 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-teal-500/10 via-cyan-400/5 to-transparent blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-28 left-1/4 w-[700px] sm:w-[800px] h-[700px] sm:h-[800px] max-w-none rounded-full bg-gradient-to-br from-teal-500/10 via-cyan-400/5 to-transparent blur-3xl" />
       </div>
       <div className="flex items-center gap-6 mb-12">
         <h2 className="flex items-center gap-3 text-xl md:text-2xl font-semibold tracking-tight">
@@ -33,7 +33,7 @@ export const Projects = () => {
           >
             {/* Image */}
             <div className={`relative md:col-span-7 ${idx % 2 === 1 ? 'md:order-2' : ''}`}>
-              <div className="relative w-full h-72 rounded-md overflow-hidden border border-teal-300/10 bg-[#0e1a23]">
+              <div className="relative w-full h-52 sm:h-64 md:h-72 lg:h-80 rounded-md overflow-hidden border border-teal-300/10 bg-[#0e1a23]">
                 {p.image ? (
                   <img
                     src={p.image}

@@ -13,7 +13,7 @@ const Loader = ({ message = 'Generating...', overlay = true, className }: Loader
       <div className="loader" id="loader">
         <div className="loader-wrapper">
           {chars.map((ch, i) => (
-            <span key={i} className="loader-letter">{ch}</span>
+            <span key={i} className="loader-letter" style={{ animationDelay: `${i * 0.1}s` }}>{ch}</span>
           ))}
           <div className="loader-circle" />
         </div>
@@ -34,6 +34,7 @@ const StyledWrapper = styled.div<{ $overlay?: boolean }>`
     align-items: center;
     z-index: ${p => (p.$overlay ? 10 : 0)};
     background: ${p => (p.$overlay ? 'linear-gradient(0deg, #1a3379, #0f172a, #000)' : 'transparent')};
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 
   .loader-wrapper {
@@ -41,10 +42,10 @@ const StyledWrapper = styled.div<{ $overlay?: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 180px;
-    height: 180px;
+    width: clamp(120px, 22vw, 200px);
+    height: clamp(120px, 22vw, 200px);
     font-family: "Inter", sans-serif;
-    font-size: 1.1em;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
     font-weight: 300;
     color: white;
     border-radius: 50%;
@@ -124,20 +125,14 @@ const StyledWrapper = styled.div<{ $overlay?: boolean }>`
     z-index: 1;
     border-radius: 50ch;
     border: none;
+    margin-inline: 1px;
   }
-  .loader-letter:nth-child(1) { animation-delay: 0s; }
-  .loader-letter:nth-child(2) { animation-delay: 0.1s; }
-  .loader-letter:nth-child(3) { animation-delay: 0.2s; }
-  .loader-letter:nth-child(4) { animation-delay: 0.3s; }
-  .loader-letter:nth-child(5) { animation-delay: 0.4s; }
-  .loader-letter:nth-child(6) { animation-delay: 0.5s; }
-  .loader-letter:nth-child(7) { animation-delay: 0.6s; }
-  .loader-letter:nth-child(8) { animation-delay: 0.7s; }
-  .loader-letter:nth-child(9) { animation-delay: 0.8s; }
-  .loader-letter:nth-child(10) { animation-delay: 0.9s; }
-  .loader-letter:nth-child(11) { animation-delay: 1s; }
-  .loader-letter:nth-child(12) { animation-delay: 1.1s; }
-  .loader-letter:nth-child(13) { animation-delay: 1.2s; }
+  /* timing is applied inline via style for variable-length messages */
+
+  @media (prefers-reduced-motion: reduce) {
+    .loader-circle { animation: none; }
+    .loader-letter { animation: none; opacity: 1; }
+  }
 
   @keyframes loader-letter-anim {
     0%,
