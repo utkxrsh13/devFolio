@@ -2,9 +2,11 @@ import { projects } from '../data/siteData';
 import { SiGithub } from 'react-icons/si';
 import { FiExternalLink } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import usePrefersReducedMotion from '../components/usePrefersReducedMotion';
 
 export const Projects = () => {
   const featured = projects.filter(p => p.featured);
+  const reduced = usePrefersReducedMotion();
   const others = projects.filter(p => !p.featured);
 
   return (
@@ -26,8 +28,8 @@ export const Projects = () => {
           <motion.article
             key={p.id}
             className={`grid gap-6 md:gap-10 md:grid-cols-12 items-center group`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={reduced?false:{ opacity: 0, y: 20 }}
+            whileInView={reduced?undefined:{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-20% 0px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
@@ -40,6 +42,7 @@ export const Projects = () => {
                     alt={`${p.title} preview`}
                     loading="lazy"
                     decoding="async"
+                    sizes="(min-width: 1024px) 700px, (min-width: 768px) 600px, 100vw"
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   />
                 ) : (
@@ -86,8 +89,8 @@ export const Projects = () => {
               <motion.div
                 key={p.id}
                 className="relative group rounded-md bg-[#0f1b25] border border-white/5 hover:border-teal-300/30 transition p-6 flex flex-col shadow-[0_0_0_1px_rgba(255,255,255,0.04)] hover:shadow-[0_0_25px_-4px_rgba(45,212,191,0.25)]"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={reduced?false:{ opacity: 0, y: 12 }}
+                whileInView={reduced?undefined:{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, ease: 'easeOut' }}
               >

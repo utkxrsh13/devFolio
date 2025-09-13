@@ -74,8 +74,17 @@ export const Navbar = ({ className }: NavbarProps) => {
   const toggleMenu = () => setOpen(o => !o);
   const closeMenu = () => setOpen(false);
 
+  // Close menu on Escape
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   return (
-    <nav className={clsx(
+    <nav aria-label="Primary" className={clsx(
       'fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-out will-change-transform',
       scrolled ? 'bg-[#0B0F17]/50 backdrop-blur-3xl border-b border-white/10' : 'bg-transparent',
       hidden ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100',
@@ -89,6 +98,7 @@ export const Navbar = ({ className }: NavbarProps) => {
               <a
                 href={`#${item.id}`}
                 className={clsx('group flex items-center gap-1 transition', active===item.id ? 'text-teal-300' : 'text-white/60 hover:text-teal-300')}
+                aria-current={active===item.id ? 'page' : undefined}
                 onClick={closeMenu}
               >
                 <span className="text-teal-300">{`0${idx+1}.`}</span>
@@ -108,6 +118,7 @@ export const Navbar = ({ className }: NavbarProps) => {
           onClick={toggleMenu}
           aria-expanded={open}
           aria-controls="mobile-nav"
+          type="button"
           className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border border-white/15 text-white/80 hover:text-teal-300 hover:border-teal-300/60 transition relative z-[60]"
         >
           <span className="sr-only">Toggle navigation</span>
@@ -122,6 +133,7 @@ export const Navbar = ({ className }: NavbarProps) => {
       <div
         className={clsx('fixed inset-0 z-40 bg-[#05080d]/50 transition-opacity md:hidden', open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none')}
         onClick={closeMenu}
+        role="presentation"
       />
       {/* Mobile sliding panel */}
       <div

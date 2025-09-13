@@ -2,8 +2,10 @@ import { useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { experience } from '../data/siteData';
 import { motion, AnimatePresence } from 'framer-motion';
+import usePrefersReducedMotion from '../components/usePrefersReducedMotion';
 
 export const Experience = () => {
+  const reduced = usePrefersReducedMotion();
   const [activeId, setActiveId] = useState(experience[0]?.id);
   const active = experience.find(e => e.id === activeId) || experience[0];
 
@@ -77,9 +79,9 @@ export const Experience = () => {
               id={`panel-${active.id}`}
               aria-labelledby={`tab-${active.id}`}
               className="flex-1 space-y-4"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
+              initial={reduced?undefined:{ opacity: 0, y: 12 }}
+              animate={reduced?undefined:{ opacity: 1, y: 0 }}
+              exit={reduced?undefined:{ opacity: 0, y: -12 }}
               transition={{ duration: 0.45, ease: 'easeOut' }}
             >
               <div>
@@ -92,12 +94,12 @@ export const Experience = () => {
               {active.bullets && (
                 <motion.ul
                   className="space-y-3 text-sm max-w-2xl"
-                  initial="hidden"
-                  animate="show"
-                  variants={{ hidden: {}, show: { transition: { staggerChildren: 0.04 } } }}
+                  initial={reduced?undefined:'hidden'}
+                  animate={reduced?undefined:'show'}
+                  variants={reduced?undefined:{ hidden: {}, show: { transition: { staggerChildren: 0.04 } } }}
                 >
                   {active.bullets.map((b,i)=>(
-                    <motion.li key={i} className="flex gap-3" variants={{ hidden: { opacity: 0, y: 6 }, show: { opacity: 1, y: 0 } }}>
+                    <motion.li key={i} className="flex gap-3" variants={reduced?undefined:{ hidden: { opacity: 0, y: 6 }, show: { opacity: 1, y: 0 } }}>
                       <span className="mt-1 text-teal-300">▸</span>
                       <span className="text-white/70 leading-relaxed">{b}</span>
                     </motion.li>

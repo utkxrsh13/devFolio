@@ -1,7 +1,9 @@
 import { skills } from '../data/siteData';
 import { motion } from 'framer-motion';
+import usePrefersReducedMotion from '../components/usePrefersReducedMotion';
 
 export const Skills = () => {
+  const reduced = usePrefersReducedMotion();
   return (
     <section id="skills" className="relative py-24 container-section scroll-mt-28">
       {/* subtle background matching the theme */}
@@ -12,7 +14,7 @@ export const Skills = () => {
 
       <div className="flex items-center gap-6 mb-10">
         <h2 className="flex items-center gap-3 text-xl md:text-2xl font-semibold tracking-tight">
-          <span className="text-teal-300 font-mono text-sm">02.</span>
+          <span className="text-teal-300 font-mono text-sm">04.</span>
           <span className="text-white">Skills</span>
           <span className="hidden md:inline-block h-px flex-1 bg-white/10" />
         </h2>
@@ -21,8 +23,8 @@ export const Skills = () => {
       <motion.ul
         role="list"
         className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5"
-        initial="hidden"
-        whileInView="show"
+        initial={reduced?false:'hidden'}
+        whileInView={reduced?undefined:'show'}
         viewport={{ once: true, margin: '-20% 0px' }}
         variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }}
       >
@@ -30,7 +32,7 @@ export const Skills = () => {
           <motion.li
             key={skill.name}
             role="listitem"
-            variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+            variants={reduced?undefined:{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
             className="group relative glass rounded-xl p-4 flex flex-col items-center gap-3 text-center border-white/5 card-hover overflow-hidden"
             tabIndex={0}
           >

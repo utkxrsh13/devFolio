@@ -1,18 +1,19 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { socials } from '../data/siteData.tsx';
 import { useEffect, useState, useRef } from 'react';
+import usePrefersReducedMotion from '../components/usePrefersReducedMotion';
 // import Resume from '../components/Resume.tsx';
 
 export const Hero = () => {
   const keywords = ['React', 'MERN', 'AI', 'FastAPI', 'LLMs'];
   const [kwIndex, setKwIndex] = useState(0);
   const kwLenRef = useRef(keywords.length);
+  const reduced = usePrefersReducedMotion();
   useEffect(() => {
-    const id = setInterval(() => {
-      setKwIndex(i => (i + 1) % kwLenRef.current);
-    }, 2600);
+    if (reduced) return;
+    const id = setInterval(() => setKwIndex(i => (i + 1) % kwLenRef.current), 2600);
     return () => clearInterval(id);
-  }, []);
+  }, [reduced]);
 
   return (
   <section id="hero" className="relative min-h-[92vh] flex items-center overflow-hidden">
@@ -36,37 +37,43 @@ export const Hero = () => {
       </div>
       {/* Right email bar */}
       <div className="hidden lg:flex flex-col gap-6 items-center fixed right-14 bottom-0">
-        <a href="mailto:you@example.com" className="rotate-90 origin-bottom-right tracking-widest text-xs text-white/60 hover:text-teal-300 transition">utkarsht0813@gmail.com</a>
+        <a href="mailto:utkarsht0813@gmail.com" className="rotate-90 origin-bottom-right tracking-widest text-xs text-white/60 hover:text-teal-300 transition">utkarsht0813@gmail.com</a>
         <div className="w-px h-40 bg-white/20 translate-x-23" />
       </div>
       <div className="container-section w-full pt-24 pb-24 relative">
         <div className="max-w-4xl">
-          <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{duration:0.5}} className="text-teal-300/80 text-[11px] xs:text-xs md:text-sm mb-5 tracking-[0.35em] font-mono">Hi, my name is</motion.p>
-          <motion.h1 initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.65, delay:0.05}} className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] md:leading-[1.05] relative">
+          <motion.p initial={reduced?false:{opacity:0,y:10}} animate={reduced?false:{opacity:1,y:0}} transition={{duration:0.5}} className="text-teal-300/80 text-[11px] xs:text-xs md:text-sm mb-5 tracking-[0.35em] font-mono">Hi, my name is</motion.p>
+          <motion.h1 initial={reduced?false:{opacity:0,y:20}} animate={reduced?false:{opacity:1,y:0}} transition={{duration:0.65, delay:0.05}} className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 leading-[1.1] md:leading-[1.05] relative">
             <span className="bg-gradient-to-r from-teal-300 via-emerald-200 to-cyan-300 bg-clip-text text-transparent">Utkarsh Tiwari</span>
             <span className="block mt-2 text-white/50 text-2xl sm:text-3xl md:text-4xl font-light tracking-tight">
               I build <span className="relative inline-block">
                 <span className="sr-only">{keywords[kwIndex]}</span>
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={keywords[kwIndex]}
-                    initial={{opacity:0,y:12,filter:'blur(4px)'}}
-                    animate={{opacity:1,y:0,filter:'blur(0px)'}}
-                    exit={{opacity:0,y:-12,filter:'blur(4px)'}}
-                    transition={{duration:0.55, ease:'easeOut'}}
-                    className="text-teal-300 font-semibold"
-                    aria-hidden
-                  >
+                {reduced ? (
+                  <span className="text-teal-300 font-semibold" aria-hidden>
                     {keywords[kwIndex]}
-                  </motion.span>
-                </AnimatePresence>
+                  </span>
+                ) : (
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={keywords[kwIndex]}
+                      initial={{opacity:0,y:12,filter:'blur(4px)'}}
+                      animate={{opacity:1,y:0,filter:'blur(0px)'}}
+                      exit={{opacity:0,y:-12,filter:'blur(4px)'}}
+                      transition={{duration:0.55, ease:'easeOut'}}
+                      className="text-teal-300 font-semibold"
+                      aria-hidden
+                    >
+                      {keywords[kwIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                )}
               </span> solutions.
             </span>
           </motion.h1>
-          <motion.p initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:0.65, delay:0.12}} className="text-white/65 text-base md:text-lg leading-relaxed mb-10 max-w-2xl">
+          <motion.p initial={reduced?false:{opacity:0,y:18}} animate={reduced?false:{opacity:1,y:0}} transition={{duration:0.65, delay:0.12}} className="text-white/65 text-base md:text-lg leading-relaxed mb-10 max-w-2xl">
             Frontend Developer specializing in React and the MERN stack, with experience building AI-powered applications, eCommerce platforms, and interactive web solutions. Always exploring cutting-edge tools like <span className="text-teal-300/90">FastAPI</span>, <span className="text-teal-300/90">TypeScript</span>, and <span className="text-teal-300/90">LLMs</span> to craft impactful user experiences.
           </motion.p>
-          <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.6, delay:0.2}} className="flex flex-col sm:flex-row gap-4">
+          <motion.div initial={reduced?false:{opacity:0,y:20}} animate={reduced?false:{opacity:1,y:0}} transition={{duration:0.6, delay:0.2}} className="flex flex-col sm:flex-row gap-4">
             <a href="#projects" className="group relative inline-flex items-center justify-center overflow-hidden rounded-md border border-teal-300/40 px-8 py-4 text-sm font-medium text-teal-300 transition focus:outline-none focus:ring-2 focus:ring-teal-400/50">
               <span className="absolute inset-0 translate-y-[110%] bg-gradient-to-br from-teal-400 via-cyan-400 to-emerald-400 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100" />
               <span className="relative group-hover:text-[#0B0F17]">View Projects</span>

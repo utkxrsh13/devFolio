@@ -17,9 +17,10 @@ function App() {
   }, [showSplash]);
   return (
     <div className="relative">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:bg-[#0B0F17] focus:text-white focus:px-3 focus:py-2 focus:rounded-md">Skip to content</a>
       {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
       <Navbar className={showSplash ? 'pointer-events-none opacity-0' : 'opacity-100 transition-opacity duration-700'} />
-      <main className={showSplash ? 'opacity-0 pointer-events-none select-none' : 'opacity-100 transition-opacity duration-700'}>
+      <main id="main" className={showSplash ? 'opacity-0 pointer-events-none select-none' : 'opacity-100 transition-opacity duration-700'}>
         <Landing />
       </main>
       {!showSplash && <Footer />}
