@@ -6,7 +6,11 @@ import Resume from './Resume.tsx';
 
 // Custom hook to track portfolio views
 const useViewCounter = () => {
-  const [views, setViews] = useState<number | null>(null);
+  const cacheKey = 'portfolio-views-cache';
+  const [views, setViews] = useState<number | null>(() => {
+    const cached = localStorage.getItem(cacheKey);
+    return cached ? Number(cached) : null;
+  });
 
   useEffect(() => {
     const namespace = 'utkarsh-portfolio';
@@ -21,13 +25,21 @@ const useViewCounter = () => {
           // Increment view count (hit endpoint)
           const res = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
           const data = await res.json();
-          setViews(data.count);
+          const nextViews = data.value ?? data.count ?? null;
+          if (nextViews !== null) {
+            setViews(nextViews);
+            localStorage.setItem(cacheKey, String(nextViews));
+          }
           sessionStorage.setItem('portfolio-viewed', 'true');
         } else {
           // Just get current count without incrementing
           const res = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`);
           const data = await res.json();
-          setViews(data.count);
+          const nextViews = data.value ?? data.count ?? null;
+          if (nextViews !== null) {
+            setViews(nextViews);
+            localStorage.setItem(cacheKey, String(nextViews));
+          }
         }
       } catch (error) {
         console.error('Failed to fetch view count:', error);
@@ -130,14 +142,20 @@ export const Navbar = ({ className }: NavbarProps) => {
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-8 h-16 relative">
         <div className="flex items-center gap-4">
           <a href="#hero" className="text-teal-300 font-semibold tracking-tight text-lg" onClick={closeMenu}>&lt;U/&gt;</a>
-          {views !== null && (
-            <span className="hidden sm:flex items-center gap-1.5 text-xs text-white/50 font-medium">
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {views !== null && views !== undefined && (
+            <div className="hidden sm:flex items-center gap-2 rounded-full border border-teal-300/20 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 shadow-[0_0_0_1px_rgba(45,212,191,0.06),0_0_24px_rgba(45,212,191,0.12)] backdrop-blur-md transition hover:border-teal-300/40 hover:bg-white/8 hover:shadow-[0_0_0_1px_rgba(45,212,191,0.12),0_0_30px_rgba(45,212,191,0.2)]">
+              <span className="inline-flex h-2 w-2 rounded-full bg-teal-300 shadow-[0_0_12px_rgba(45,212,191,0.9)] animate-pulse" />
+              <svg className="w-3.5 h-3.5 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
-              <span>{views.toLocaleString()} views</span>
-            </span>
+              <span className="text-white/90 tabular-nums tracking-wide">
+                {views.toLocaleString()}
+              </span>
+              <span className="rounded-full bg-teal-300/15 px-2 py-0.5 text-[10px] uppercase tracking-[0.2em] text-teal-300">
+                views
+              </span>
+            </div>
           )}
         </div>
         <ol className="hidden md:flex items-center gap-8 text-xs font-medium tracking-wide">
