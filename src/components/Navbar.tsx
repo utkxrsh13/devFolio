@@ -52,14 +52,14 @@ const useViewCounter = () => {
   return views;
 };
 
-interface NavItem { id: string; label: string }
+interface NavItem { id: string; label: string; url?: string }
 
 const navItems: NavItem[] = [
   { id: 'hero', label: 'Home' },
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Work' },
   { id: 'contact', label: 'Contact' },
-  { id: 'Topmate', url:'https://topmate.io/utkxrsh' }
+  { id: 'topmate', label: 'Topmate', url: 'https://topmate.io/utkxrsh' }
 ];
 
 interface NavbarProps { className?: string }
@@ -161,7 +161,7 @@ export const Navbar = ({ className }: NavbarProps) => {
           {navItems.map((item, idx) => (
             <li key={item.id}>
               <a
-                href={`#${item.id}`}
+                href={item.url ?? `#${item.id}`}
                 className={clsx('group flex items-center gap-1 transition', active===item.id ? 'text-teal-300' : 'text-white/60 hover:text-teal-300')}
                 aria-current={active===item.id ? 'page' : undefined}
                 onClick={closeMenu}
@@ -214,7 +214,7 @@ export const Navbar = ({ className }: NavbarProps) => {
               <li key={item.id}>
                 <a
                   ref={idx===0 ? firstLinkRef : undefined}
-                  href={`#${item.id}`}
+                  href={item.url ?? `#${item.id}`}
                   onClick={closeMenu}
                   className={clsx('group flex items-center gap-3 transition', active===item.id ? 'text-teal-300' : 'text-white/60 hover:text-teal-300')}
                 >
